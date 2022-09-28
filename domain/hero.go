@@ -1,6 +1,7 @@
 package domain
 
 type Hero struct {
+	Sprite
 	HP int
 }
 
