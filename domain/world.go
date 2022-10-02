@@ -91,14 +91,6 @@ func (w *World) GetCoordinateFromUserInput() (x1, x2 *int) {
 	return x1, x2
 }
 
-func (w *World) setSpriteInPosition(idx int, sprite ISprite) {
-	w.sprites[idx] = sprite
-}
-
-func (w *World) removeSpriteInPosition(idx int) {
-	w.sprites[idx] = nil
-}
-
 func (w *World) getSpriteInPosition(idx int) ISprite {
 	return w.sprites[idx]
 }
