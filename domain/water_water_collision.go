@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"collision-detecting/utils"
 	"fmt"
 )
 
@@ -15,13 +14,10 @@ func NewWaterAndWaterCollision(next *ICollision) *WaterAndWaterCollision {
 	}
 }
 
-func (wwc *WaterAndWaterCollision) match(x1 int, x2 int) bool {
-	s1 := wwc.world.getSpriteInPosition(x1)
-	s2 := wwc.world.getSpriteInPosition(x2)
-
-	return utils.IsSameType(s1, &Water{}) && utils.IsSameType(s2, &Water{})
+func (wwc *WaterAndWaterCollision) match(s1 ISprite, s2 ISprite) bool {
+	return s1.getType() == "water" && s2.getType() == "water"
 }
 
-func (wwc *WaterAndWaterCollision) doHandling(x1 int, x2 int) {
+func (wwc *WaterAndWaterCollision) doHandling(s1 ISprite, s2 ISprite) {
 	fmt.Printf("water and water collision, cannot move x1 to x2\n")
 }

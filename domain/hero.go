@@ -1,12 +1,12 @@
 package domain
 
 type Hero struct {
-	Sprite
+	*Sprite
 	HP int
 }
 
 func NewHero() *Hero {
-	return &Hero{HP: 30}
+	return &Hero{HP: 30, Sprite: NewSprite("hero")}
 }
 
 func (h *Hero) substractHP(val int) {

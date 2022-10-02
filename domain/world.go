@@ -19,8 +19,7 @@ type World struct {
 func NewWorld(c *ICollision) *World {
 	world := &World{collision: c, length: 30}
 	world.sprites = world.initSprites()
-	world.collision.setWorld(world)
-	// fmt.Println(world.sprites)
+	PrintItems(world.sprites)
 	return world
 }
 
@@ -29,7 +28,7 @@ func (w *World) initSprites() []ISprite {
 	sprites := make([]ISprite, w.length)
 
 	rand.Seed(time.Now().UnixNano())
-	temp := []ISprite{NewHero(), NewHero(), NewHero(), NewHero(), NewWater(), NewWater(), NewWater(), NewFire(), NewFire(), NewFire()}
+	temp := []ISprite{NewHero(), NewHero(), NewHero(), NewHero(), NewSprite("water"), NewSprite("water"), NewSprite("water"), NewSprite("fire"), NewSprite("fire"), NewSprite("fire")}
 
 	for i := 0; i < len(temp); i++ {
 		j := rand.Intn(w.length)
@@ -39,6 +38,8 @@ func (w *World) initSprites() []ISprite {
 		}
 
 		sprites[j] = temp[i]
+		sprites[j].setCoordinate(j)
+		sprites[j].setWorld(w)
 	}
 
 	return sprites
@@ -48,7 +49,7 @@ func (w *World) Move(x1 int, x2 int) {
 	s1 := w.sprites[x1]
 	s2 := w.sprites[x2]
 	if s1 != nil && s2 != nil {
-		w.collision.handle(x1, x2)
+		w.collision.handle(s1, s2)
 	} else if s1 != nil && s2 == nil {
 		w.sprites[x2] = s1
 		w.sprites[x1] = nil
